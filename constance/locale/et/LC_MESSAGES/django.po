@@ -1,0 +1,84 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: django-constance\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-07-15 16:38+1200\n"
+"PO-Revision-Date: 2015-09-26 21:07+0200\n"
+"Last-Translator: Jürno Ader <jyrno42@gmail.com>\n"
+"Language-Team: Estonian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: et\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.7.5\n"
+
+#: admin.py:72
+#, python-format
+msgid ""
+"Constance doesn't support config values of the type %(config_type)s. Please "
+"fix the value of '%(name)s'."
+msgstr ""
+"Constance doesn't support config values of the type %(config_type)s. Please "
+"fix the value of '%(name)s'."
+
+#: admin.py:91
+msgid ""
+"The settings have been modified by someone else. Please reload the form and "
+"resubmit your changes."
+msgstr ""
+"Seadeid on vahepeal muudetud, palun esitage oma muudatused peale seda kui "
+"olete lehe uuesti laadinud"
+
+#: admin.py:129
+msgid "Live settings updated successfully."
+msgstr "Seaded edukalt muudetud."
+
+#: admin.py:134
+msgid "Constance config"
+msgstr "Muuda seadeid"
+
+#: admin.py:177
+msgid "config"
+msgstr "konfiguratsioon"
+
+#: apps.py:9
+msgid "Constance"
+msgstr "Seaded"
+
+#: backends/database/models.py:19
+msgid "constance"
+msgstr "seaded"
+
+#: backends/database/models.py:20
+msgid "constances"
+msgstr "seaded"
+
+#: templates/admin/constance/change_list.html:50
+msgid "Name"
+msgstr "Nimi"
+
+#: templates/admin/constance/change_list.html:51
+msgid "Default"
+msgstr "Vaikimisi"
+
+#: templates/admin/constance/change_list.html:52
+msgid "Value"
+msgstr "Väärtus"
+
+#: templates/admin/constance/change_list.html:53
+msgid "Is modified"
+msgstr "Muudetud"
+
+#: templates/admin/constance/change_list.html:79
+msgid "Save"
+msgstr "Salvesta"
+
+#: templates/admin/constance/change_list.html:89
+msgid "Home"
+msgstr "Avaleht"
