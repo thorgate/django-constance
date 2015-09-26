@@ -16,6 +16,7 @@ from django.utils import six
 from django.utils.encoding import smart_bytes
 from django.utils.formats import localize
 from django.utils.translation import ugettext_lazy as _
+import django
 
 
 from . import LazyConfig, settings
@@ -42,6 +43,17 @@ FIELDS = {
     float: (fields.FloatField, {'widget': NUMERIC_WIDGET}),
 }
 
+def parse_additional_fields(fields):
+   for key in fields:
+      field = fields[key]
+      field[0] = eval(field[0])
+      if 'widget' in field[1]:
+         field[1]['widget'] = eval(field[1]['widget'])
+   return fields
+
+
+FIELDS.update(parse_additional_fields(settings.ADDITIONAL_FIELDS))
+
 if not six.PY3:
     FIELDS.update({
         long: INTEGER_LIKE,
@@ -56,8 +68,13 @@ class ConstanceForm(forms.Form):
         super(ConstanceForm, self).__init__(*args, initial=initial, **kwargs)
         version_hash = hashlib.md5()
 
-        for name, (default, help_text) in settings.CONFIG.items():
-            config_type = type(default)
+        for name, options in settings.CONFIG.items():
+            default, help_text = options[0], options[1]
+            if len(options) == 3:
+               config_type = options[2]
+            else:
+               config_type = type(default)
+
             if config_type not in FIELDS:
                 raise ImproperlyConfigured(_("Constance doesn't support "
                                              "config values of the type "
@@ -103,8 +120,8 @@ class ConstanceAdmin(admin.ModelAdmin):
         # First load a mapping between config name and default value
         if not self.has_change_permission(request, None):
             raise PermissionDenied
-        default_initial = ((name, default)
-            for name, (default, help_text) in settings.CONFIG.items())
+        default_initial = ((name, options[0])
+            for name, options in settings.CONFIG.items())
         # Then update the mapping with actually values from the backend
         initial = dict(default_initial,
             **dict(config._backend.mget(settings.CONFIG.keys())))
@@ -128,7 +145,8 @@ class ConstanceAdmin(admin.ModelAdmin):
             'form': form,
             'media': self.media + form.media,
         }
-        for name, (default, help_text) in settings.CONFIG.items():
+        for name, options in settings.CONFIG.items():
+            default, help_text = options[0], options[1]
             # First try to load the value from the actual backend
             value = initial.get(name)
             # Then if the returned value is None, get the default
