@@ -62,8 +62,8 @@
                 </thead>
                 {% for item in config %}
                 <tr class="{% cycle 'row1' 'row2' %}">
-                    <th>{{ item.name }}
-                        <div class="help">{{ item.help_text|linebreaksbr }}</div>
+                    <th>{{ item.help_text|linebreaksbr }}
+                        <div class="help">{{ item.name }}</div>
                     </th>
                     <td>
                         {{ item.default }}
@@ -93,7 +93,7 @@
 {% block breadcrumbs %}
 <div class="breadcrumbs">
 <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
-&rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ app_label|capfirst|escape }}</a>
+&rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{% trans 'Constance' %}</a>
 &rsaquo; {{ opts.verbose_name_plural|capfirst }}
 </div>
 {% endblock %}
